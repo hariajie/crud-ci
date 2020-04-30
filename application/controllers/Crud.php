@@ -40,8 +40,8 @@ class Crud extends CI_Controller {
 		foreach ($data_summary as $rows) {
 			$action = '';
 			$pk = $rows->id;
-			$action .= '<a href="'.base_url().'crud/edit/'.$rows->id.'" title="edit"><i class="fa fa-edit"></i></a>';
-			$action .= '&nbsp;<a href="'.base_url().'crud/delete/'.$rows->id.'" title="Hapus Data" onclick="return confirm(\'Apa anda yakin menghapus data ini?\')"><i class="fa fa-trash"></i></a>';
+			$action .= '<a href="'.base_url().'crud/edit/'.$rows->id.'" title="Edit Data" class="btn btn-warning btn-circle btn-sm"><i class="fa fa-edit"></i></a>';
+			$action .= '&nbsp;<a href="'.base_url().'crud/delete/'.$rows->id.'" title="Hapus Data" class="btn btn-danger btn-circle btn-sm" onclick="return confirm(\'Apa anda yakin menghapus data ini?\')"><i class="fa fa-trash"></i></a>';
 			$rows->action = $action;
 			
 

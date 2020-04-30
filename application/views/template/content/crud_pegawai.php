@@ -16,7 +16,6 @@
               data-show-refresh="false"
               data-show-toggle="true"
               data-show-fullscreen="true"
-              data-show-columns="true"
               data-show-columns-toggle-all="true"
               data-detail-view="false"
               data-show-export="true"
@@ -65,7 +64,7 @@
 <script>
 
     var $table = $('#list');
-    var saved_unor = "", saved_unker = "", saved_tingkat_resiko = "", saved_status_responden = "",saved_nip = "", saved_no_ktp = "",saved_page = 1, saved_size = 10, saved_search = "";
+    var saved_page = 1, saved_size = 10, saved_search = "";
 
     function queryParams(params) {
       return params
