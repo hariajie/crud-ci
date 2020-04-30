@@ -13,8 +13,8 @@ class Crud extends CI_Controller {
 	{
 		$data = array();
 		//$data['pegawai'] = $this->mpegawai->get_pegawai();
-		$data['content'] = "crud_pegawai";
-		$this->load->view('template', $data);
+		$data['content'] = "template/content/crud_pegawai";
+		$this->load->view('template/template', $data);
 	}
 
 	function data() {
@@ -38,8 +38,11 @@ class Crud extends CI_Controller {
 		//$tingkat_resiko_authorization = tingkat_resiko_athorization();
 		//$current_role = $this->session->userdata('role');
 		foreach ($data_summary as $rows) {
-			$menu = '';
+			$action = '';
 			$pk = $rows->id;
+			$action .= '<a href="'.base_url().'crud/edit/'.$rows->id.'" title="edit"><i class="fa fa-edit"></i></a>';
+			$action .= '&nbsp;<a href="'.base_url().'crud/delete/'.$rows->id.'" title="Hapus Data" onclick="return confirm(\'Apa anda yakin menghapus data ini?\')"><i class="fa fa-trash"></i></a>';
+			$rows->action = $action;
 			
 
 			$datas[] = $rows;
@@ -55,5 +58,10 @@ class Crud extends CI_Controller {
 		$this->output
         	 ->set_content_type('application/json')
         	 ->set_output(json_encode($response));
+	}
+
+	function delete($id) {
+		$this->mpegawai->delete($no);
+		redirect(base_url().'crud');
 	}
 }
