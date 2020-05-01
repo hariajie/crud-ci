@@ -5,9 +5,13 @@
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">List Data Pegawai</h6>
+              <span class="float-left">
+              <h6 class="m-0 font-weight-bold text-primary text-left">List Data Pegawai</h6>
+             </span>
+              
             </div>
             <div class="card-body">
+              <span class=""><a class="btn btn-info" href="<?php echo site_url('crud/tambah');?>"><i class="fa fa-add"></i> Tambah Data</a></span>
               <div class="table-responsive">
                 <table class="table table-bordered" id="list" width="100%" cellspacing="0"
                   data-toggle="table" 
