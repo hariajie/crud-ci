@@ -47,7 +47,7 @@ class Crud extends CI_Controller {
 			$action = '';
 			$pk = $rows->id;
 			$rows->tanggal_lahir = $this->indodate->tanggal_indo($rows->tanggal_lahir);
-			$action .= '<a href="'.base_url().'crud/edit/'.$rows->id.'" title="Edit Data" class="btn btn-warning btn-circle btn-sm"><i class="fa fa-edit"></i></a>';
+			$action .= '<a href="'.base_url().'crud/ubah/'.$rows->id.'" title="Edit Data" class="btn btn-warning btn-circle btn-sm"><i class="fa fa-edit"></i></a>';
 			$action .= '&nbsp;<a href="'.base_url().'crud/delete/'.$rows->id.'" title="Hapus Data" class="btn btn-danger btn-circle btn-sm" onclick="return confirm(\'Apa anda yakin menghapus data ini?\')"><i class="fa fa-trash"></i></a>';
 			$rows->action = $action;
 			
@@ -190,7 +190,7 @@ class Crud extends CI_Controller {
 		//$this->form_validation->set_error_delimiters('<div class="text-danger">','</div>');
 
 		if($this->form_validation->run()==FALSE) {
-			$this->ubah();
+			$this->ubah($id);
 		}
 		else {
 			$dt = array();
@@ -202,8 +202,8 @@ class Crud extends CI_Controller {
 			$dt['email'] = $this->input->post("email");
 			
 
-			$insert = $this->mpegawai->edit($dt, $id);
-			if($insert) {
+			$edit = $this->mpegawai->edit($dt, $id);
+			if($edit) {
 				$this->session->set_flashdata('msg_success', 'Data berhasil diubah');
 				redirect(base_url().'crud');
 			}

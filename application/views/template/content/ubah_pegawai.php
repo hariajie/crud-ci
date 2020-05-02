@@ -6,10 +6,10 @@
           <div class="card shadow mb-4">
             <div class="card-header py-3">
               <span class="float-left">
-              <h6 class="m-0 font-weight-bold text-primary text-left">Form Tambah Pegawai</h6>
+              <h6 class="m-0 font-weight-bold text-primary text-left">Form Ubah Pegawai</h6>
              </span>
             </div>
-            <form role="form" method="post" action="<?php echo site_url('crud/add');?>">
+            <form role="form" method="post" action="<?php echo site_url('crud/edit/').$pegawai->id;?>">
             <div class="card-body">
               <div class="form-row">
                 <div class="form-group col-md-12">
@@ -33,7 +33,7 @@
               <div class="form-row">
                 <div class="form-group col-md-12">
                   <label for="alamat"><b>Alamat</b></label>
-                  <textarea class="form-control <?php if(form_error('alamat')!=null) echo ' is-invalid' ;?>" id="alamat" name="alamat" placeholder="Input Alamat" value="<?php echo $pegawai->alamat;?>" rows="3"></textarea>
+                  <textarea class="form-control <?php if(form_error('alamat')!=null) echo ' is-invalid' ;?>" id="alamat" name="alamat" placeholder="Input Alamat" rows="3"><?php echo $pegawai->alamat;?></textarea>
                   <?php echo form_error('alamat', '<span class="text-danger">', '</span>');?>
                 </div>
               </div>
