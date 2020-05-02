@@ -1,17 +1,19 @@
 <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Data Pegawai</h1>
-          <p class="mb-4">Data Pegawai menggunakan Bootstrap-Table.</p>
+          
+          <h1 class="h3 mb-2 text-gray-800"><?php echo $judul;?></h1>
+          <p class="mb-4"><?php echo $desc;?></p>
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
+              <div id="notif"></div>
               <span class="float-left">
               <h6 class="m-0 font-weight-bold text-primary text-left">List Data Pegawai</h6>
              </span>
               
             </div>
             <div class="card-body">
-              <span class=""><a class="btn btn-info" href="<?php echo site_url('crud/tambah');?>"><i class="fa fa-add"></i> Tambah Data</a></span>
+              <span class=""><a class="btn btn-info" href="<?php echo site_url('crud/tambah');?>"><i class="fa fa-add"></i> Tambah Pegawai</a></span>
               <div class="table-responsive">
                 <table class="table table-bordered" id="list" width="100%" cellspacing="0"
                   data-toggle="table" 
@@ -33,11 +35,14 @@
               data-page-size="10"
               data-page-list="[10, 25, 50, 100, 500, all]"
               data-show-footer="true"
+              data-resizable="true"
               data-ajax="ajaxRequest"
               data-search="true"
               data-search-on-enter-key="true"
               data-side-pagination="server"
               data-pagination="true"
+              data-pagination-loop="false"
+              data-page-number="<?php echo $last_summary_page; ?>"
               data-query-params="queryParams"
               data-show-jump-to="true">
                   <thead>
@@ -59,12 +64,21 @@
 
 <link href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css" rel="stylesheet">
 <link href="https://unpkg.com/bootstrap-table@1.16.0/dist/extensions/page-jump-to/bootstrap-table-page-jump-to.min.css" rel="stylesheet">
+<link href="https://unpkg.com/jquery-resizable-columns@0.2.3/dist/jquery.resizableColumns.css" rel="stylesheet">
+
+
 <script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
 <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
 <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table-locale-all.min.js"></script>
+<script src="https://unpkg.com/jquery-resizable-columns@0.2.3/dist/jquery.resizableColumns.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.16.0/dist/extensions/resizable/bootstrap-table-resizable.min.js"></script>
 <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/extensions/page-jump-to/bootstrap-table-page-jump-to.min.js"></script>
 <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/extensions/export/bootstrap-table-export.min.js"></script>
 
+<!-- BootstrapGrowl-->
+<script src="<?php echo base_url('assets/plugins/bootstrap-growl/jquery.bootstrap-growl.min.js');?>"></script>
+
+<!-- Script JS untuk Ajax Table-->
 <script>
 
     var $table = $('#list');
@@ -107,3 +121,31 @@
     }
  
     </script>
+
+<!-- Script JS lainnya-->
+<script>
+   <?php
+    if(null !== $this->session->flashdata('msg_success')) {
+  ?>
+       $(function() { 
+        $.bootstrapGrowl( '<?php echo $this->session->flashdata('msg_success');?>', {
+        ele: '#notif', 
+        type: 'info',
+        align: 'center',
+        delay: 1500 });
+      });
+
+  <?php
+    } else 
+    if(null !== $this->session->flashdata('msg_hapus')) {
+     ?>
+       $(function() { 
+        $.bootstrapGrowl( '<?php echo $this->session->flashdata('msg_hapus');?>', {
+        ele: '#notif', 
+        type: 'danger',
+        align: 'center',
+        delay: 1500 });
+      });
+  <?php
+    } ?>
+</script>

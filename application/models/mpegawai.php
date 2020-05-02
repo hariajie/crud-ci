@@ -26,6 +26,8 @@ Class Mpegawai extends CI_Model {
     			 ->limit($limit, $offset)
     			 ->order_by($sort, $order);
         $where = "1=1";
+
+        /* Tambahan apabila ada filtering
         if ( !empty($filtering) ) {
             if ( is_array($filtering) ) {
                 foreach ($filtering as $key => $value) {
@@ -45,6 +47,8 @@ Class Mpegawai extends CI_Model {
                         OR no_ktp LIKE '%".$this->db->escape_like_str($search)."%'
                         )";
     	}
+		*/
+
         $this->db->where($where);
     	$query = $this->db->get("pegawai");
     	if ( $query ) {
@@ -80,7 +84,7 @@ Class Mpegawai extends CI_Model {
 
 	function get_pegawai_id($id)
 	{
-		$this->db->where('No',$id);
+		$this->db->where('id',$id);
 		$q = $this->db->get('pegawai');
 
 		return $q->row();
@@ -89,40 +93,26 @@ Class Mpegawai extends CI_Model {
 
 	function get_total_pegawai()
 	{
-		$q = $this->db->get('pegawai','No');
+		$q = $this->db->get('pegawai','id');
     	return $q->num_rows();
 	}
 
-	function id_incr()
-	{
-		$this->db->select("No");
-		$this->db->order_by('No','DESC');
-		$this->db->limit(1);
-		$q = $this->db->get('pegawai');
-		$old_id = $q->row()->id;
-
-		$new_id = $old_id + 1;
-		return $new_id;
-	}  
-
 	function insert($data)
     {
-    	$data['No'] = $this->id_incr();
     	$q = $this->db->insert('pegawai', $data);
     	return $q;
-
     }
 
     function edit($data, $id)
     {
-    	$this->db->where('No', $id);
+    	$this->db->where('id', $id);
     	$q = $this->db->update('pegawai', $data);
     	return $q;
     }
 
     function delete($id)
     {
-    	$this->db->where('No', $id);
+    	$this->db->where('id', $id);
     	$q = $this->db->delete('pegawai');
     	if($q) {
     		return TRUE;
